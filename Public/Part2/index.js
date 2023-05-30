@@ -283,3 +283,4 @@ const calAverage = function (arr) {
 };
 
 console.log(calAverage(totals));
+console.log(calAverage(tip0));
