@@ -118,3 +118,46 @@ const printForecast = function (arr) {
 };
 
 printForecast(data3);
+
+const needle = [
+  "hay",
+  "junk",
+  "hay",
+  "hay",
+  "moreJunk",
+  "needle",
+  "randomJunk",
+];
+
+function findNeedle(haystack) {
+  for (let i = 0; i < haystack.length; i++) {
+    if (haystack.indexOf("needle")) {
+      return `found needle at position` + haystack.indexOf("needle");
+    }
+  }
+}
+
+console.log(findNeedle(needle));
+
+// To Check for grades
+function getGrade(s1, s2, s3) {
+  let mark = [s1, s2, s3];
+  let sum = 0;
+  for (let i = 0; i < mark.length; i++) {
+    sum += mark[i];
+  }
+  const average = sum / mark.length;
+  if (average < 60) {
+    return "F";
+  } else if (average <= 70) {
+    return "D";
+  } else if (average <= 80) {
+    return "C";
+  } else if (average <= 90) {
+    return "B";
+  } else {
+    return "A";
+  }
+}
+
+console.log(getGrade(30, 30, 100));
