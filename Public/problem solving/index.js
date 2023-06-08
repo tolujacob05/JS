@@ -161,3 +161,221 @@ function getGrade(s1, s2, s3) {
 }
 
 console.log(getGrade(30, 30, 100));
+
+// SQUARING AND ADDITION OF NUM
+
+function squareSum(numbers) {
+  let square = numbers.reduce((acc, curVal) => {
+    return acc + curVal ** 2;
+  }, 0);
+  return square;
+}
+
+const nested = [2, 5, 5, [6, 1, 5]];
+console.log(nested);
+
+const [a, , , j] = nested;
+console.log(a, j);
+
+const starterMenu = ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"];
+const mainMenu = ["Pizza", "Pasta", "Risotto"];
+const newArray = starterMenu.concat(mainMenu);
+
+console.log(newArray);
+
+console.log("jonas" && "0");
+
+const game = {
+  team1: "Bayern Munich",
+  team2: "Borrussia Dortmund",
+  players: [
+    [
+      "Neuer",
+      "Pavard",
+      "Martinez",
+      "Alaba",
+      "Davies",
+      "Kimmich",
+      "Goretzka",
+      "Coman",
+      "Muller",
+      "Gnarby",
+      "Lewandowski",
+    ],
+    [
+      "Burki",
+      "Schulz",
+      "Hummels",
+      "Akanji",
+      "Hakimi",
+      "Weigl",
+      "Witsel",
+      "Hazard",
+      "Brandt",
+      "Sancho",
+      "Gotze",
+    ],
+  ],
+  score: "4:0",
+  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
+  date: "Nov 9th, 2037",
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+const players1 = [...game.players[0]];
+const players2 = [...game.players[1]];
+
+const [gk1, ...fieldPlayers1] = [...game.players[0]];
+const [gk2, ...fieldPlayers2] = [...game.players[1]];
+
+console.log(gk1, gk2, fieldPlayers1, fieldPlayers2);
+
+const allPlayers = [...game.players[0], ...game.players[1]];
+console.log(allPlayers);
+
+const players1Final = [...game.players[0], "Thiage", "Coutinho", "Perisic"];
+
+console.log(players1Final);
+
+const printGoals = function (...players) {
+  console.log(`${players.length} goals were scored`);
+};
+
+printGoals("Davies", "Muller", "Lewandowski", "Kimmich");
+printGoals(...game.scored);
+
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+console.log(team1, draw, team2);
+// const bayern = 4;
+// const Dortmund = 0;
+
+team1 < team2 && console.log("team1 is likely to win the match");
+team1 > team2 && console.log("team2 is likely to win the match");
+
+for (const [i, el] of allPlayers.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+
+for (const [i, el] of game.scored.entries()) {
+  console.log(`Goal ${i + 1}: ${el}`);
+}
+
+const odds = Object.values(game.odds);
+let average = 0;
+for (const odd of odds) average += odd;
+average /= odds.length;
+
+console.log(average);
+
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === "x" ? "draw" : `Victory ${game[team]}`;
+  console.log(`Odd of ${teamStr} ${odd}`);
+}
+
+const scorers = {};
+for (const player of game.scored) {
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+}
+console.log(scorers);
+
+const gameEvents = new Map([
+  [17, "⚽️ GOAL"],
+  [36, "🔁 Substitution"],
+  [47, "⚽️ GOAL"],
+  [61, "🔁 Substitution"],
+  [64, "🔶 Yellow card"],
+  [69, "🔴 Red card"],
+  [70, "🔁 Substitution"],
+  [72, "🔁 Substitution"],
+  [76, "⚽️ GOAL"],
+  [80, "⚽️ GOAL"],
+  [92, "🔶 Yellow card"],
+]);
+
+const events = [...new Set(gameEvents.values())];
+const eKey = new Set(gameEvents.keys());
+console.log(events);
+console.log(eKey);
+
+console.log(gameEvents.delete(64));
+console.log(gameEvents);
+
+for (const [key, value] of gameEvents) {
+  // if (key < 45) console.log(`[FIRST HALF] ${key}: ${value}`);
+  // else if (key > 45) console.log(`[SECOND HALF] ${key}: ${value}`);
+  const half = key <= 45 ? "FIRST" : "SECOND";
+  console.log(`[${half} HALF] ${key}: ${value}`);
+}
+
+// const [firstName, lastName] = "Jonas Schmedtmann".split(" ");
+
+// const newName = ["Mr.", firstName, lastName.toUpperCase()].join(" ");
+// console.log(newName);
+
+const announcement =
+  "Please all passangers \n should go tho the boarding door right now! Boarding door 231";
+console.log(announcement.replaceAll("door", "gate"));
+
+document.body.append(document.createElement("textarea"));
+document.body.append(document.createElement("button"));
+
+// const camelCase = function (n) {
+//   const [a, b] = n.split("_");
+//   // const names = [a, b].join("");
+//   // console.log(names);
+//   for (const newName of [a, b]) {
+//     const newCamelCase = a + b[0].toUpperCase() + b.slice(1);
+//     console.log(newCamelCase);
+//   }
+//   // for (const newName of names) {
+//   //   const newCamelCase = newName[].toUpperCase() + newName.slice(1);
+//   //   console.log(newCamelCase);
+//   // }
+// };
+
+document.querySelector("button").addEventListener("click", function () {
+  const text = document.querySelector("textarea").value;
+  const rows = text.split("\n");
+  for (const [i, newRow] of rows.entries()) {
+    const [a, b] = newRow.toLowerCase().trim().split("_");
+    const newCamelCase = a + b[0].toUpperCase() + b.slice(1);
+    console.log(`${newCamelCase.padEnd(20)}${"👍🏾".repeat(i + 1)}`);
+  }
+});
+
+// camelCase("first_name");
+// camelCase("last_name");
+// camelCase("calculate_age");
+
+// const names = names.spit("");
+// console.log("first_name".split("_"));
+// console.log("last_name".split("_"));
+// console.log("calculate_age".split("_"));
+const [first, last] = "james_hilda".split("_");
+// const c = n;
+console.log(first, last);
+const split = first + last[0].toUpperCase() + last.slice(1);
+console.log(split);
+
+const flights = `_Delayed_Departure;fao93766109;txl2133758440;11:25
+  +_Arrival;bru0943384722;fao93766109;11:45
+  +_Delayed_Arrival;hel7439299980;fao93766109;12:05
+  +_Departure;fao93766109;lis2323639855;12:30;`;
+
+const code = (str) => str.slice(0, 3).toUpperCase();
+
+for (const flight of flights.split("+")) {
+  const [type, from, to, time] = flight.split(";");
+  // console.log(type, from, to, time);
+  const all = `${type.startsWith("_Delayed") ? "🛑" : ""}${type.replaceAll(
+    "_",
+    ""
+  )} ${code(from)} ${code(to)} ${time.replaceAll(":", "h")}`.padStart(36);
+  console.log(all);
+}
