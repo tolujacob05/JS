@@ -336,3 +336,261 @@ const mov = movements.map(
 );
 
 console.log(mov);
+
+// FILTER METHOOD
+const deposit = movements.filter(function (movement) {
+  return movement > 0;
+});
+console.log(deposit);
+
+// const deposit = [];
+// for (const movement of movements) if (movement > 0) deposit.push(movement);
+// console.log(deposit);
+
+const withdrawals = movements.filter(function (movement) {
+  return movement < 0;
+});
+console.log(withdrawals);
+
+const withdraw = [];
+for (const movement of movements) if (movement < 0) withdraw.push(movement);
+console.log(withdraw);
+
+// THE REDUCE METHOD
+const total = movements.reduce(function (acc, movement, i, arr) {
+  console.log(`iterations ${i}: ${acc} `);
+  return acc + movement;
+}, 0);
+
+console.log(total);
+
+let sum = 0;
+for (const [i, value] of movements.entries()) {
+  sum += value;
+  console.log(`iteration ${i}: ${sum}`);
+}
+console.log(sum);
+
+let sum2 = 0;
+movements.forEach((movement, i) => {
+  sum2 += movement;
+  console.log(`iteration ${i}: ${sum2}`);
+});
+console.log(sum2);
+
+// Using rduce to get one single value
+const max = movements.reduce(
+  (acc, movement) => (acc > movement ? acc : movement),
+  movements[0]
+);
+console.log(max);
+
+const test1 = [5, 2, 4, 1, 15, 8, 3];
+const test2 = [16, 6, 10, 5, 6, 1, 4];
+// let humanAge = [];
+
+const calcAverageHumanAge = function (ages) {
+  let humanAge = [];
+  ages.map(function (age, i) {
+    if (age <= 2) {
+      return humanAge.push(2 * age);
+    } else if (age > 2) {
+      return humanAge.push(16 + age * 4);
+    }
+  });
+  console.log(humanAge);
+
+  const lessThan18 = humanAge.filter(function (age) {
+    return age >= 18;
+  });
+  console.log(lessThan18);
+
+  const average = lessThan18.reduce(function (acc, age, i) {
+    // console.log(`Accumulator ${i}: ${acc}`);
+    return acc + age / lessThan18.length;
+  }, 0);
+  console.log(average);
+  // const average = humanAge.reduce(function (acc, age) {
+  //   return acc + age / humanAge.length;
+  // }, 0);
+  // console.log(average);
+};
+
+const arrow = (ages) =>
+  ages
+    .map((age) => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter((age) => age >= 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+
+console.log(arrow(test1));
+console.log(arrow(test2));
+// calcAverageHumanAge(test1);
+// calcAverageHumanAge(test2);
+
+const dollarToPound = 1.26;
+
+const totalDepositInGBP = movements
+  .filter((movement) => movement > 0)
+  .map((movement, i, arr) => {
+    // console.log(movement / dollarToPound);
+    // console.log(arr);
+    return movement / dollarToPound;
+  })
+  .reduce((acc, movement) => acc + movement, 0);
+
+console.log(totalDepositInGBP);
+
+// const pound = function (amount) {
+//   console.log(amount / dollarToPound);
+// };
+
+// pound(3840);
+
+// USING THE FIND METHOD
+const first = movements.find((movement) => movement < 0);
+
+console.log(first);
+console.log(movements);
+
+// USING THE SOME METHOD
+// Handles Condition unlike includes which handles equality
+const anyD = movements.some((movement) => movement > 0);
+console.log(anyD);
+
+// USING THE EVERY
+// ONLY RETURNS TRUE IF ALL THE ELEMENTS IN THE ARRAY SATISFIES THE CONDITION PASSED IN
+const anyDeposit = movements.every((movement) => movement > 0);
+console.log(anyDeposit);
+
+// SEPERATE CALLBACKS
+const deposits = (movement) => movement > 0;
+console.log(movements.some(deposits));
+
+// THE FLAT AND FLATMAP ARRAY METHOD
+// USING THE FLAT MEATHOD
+const array = [[1, 2, 3], [4, 5, 6], 7, 8, 9];
+console.log(array.flat());
+
+// USING THE DEEP
+const arrayD = [[[1, 2], 3], [4, [5, 6]], 7, [8, 9]];
+console.log(arrayD.flat(2));
+
+// THE SORT METHOD
+// WITH STRINGS
+const names = ["James", "John", "Aanu", "Opeyemi", "Seun"];
+console.log(names.sort());
+
+// WITH NUMBERS
+console.log(movements);
+// return < 0, A,B
+// return > 0, B,A
+
+// ASCEMDING ORDER
+movements.sort((a, b) => {
+  if (a > b) return 1;
+  if (b > a) return -1;
+});
+console.log(movements);
+
+// OR
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// DESCENDING ORDER
+movements.sort((a, b) => {
+  if (a > b) return -1;
+  if (b > a) return 1;
+});
+console.log(movements);
+
+// OR
+movements.sort((a, b) => b - a);
+console.log(movements);
+
+// CREATING ARRAY MANUALLY
+const z = new Array(10);
+console.log(z.fill(2, 5));
+
+const x = [1, 2, 2, 3, 4, 6, 1, 3, 4, 3, 2];
+console.log(x.fill(2, 5, 9));
+
+const y = Array.from({ length: 10 }, (_, i) => i + 2);
+console.log(y);
+
+// const dice = Array.from(
+//   { length: 100 },
+//   (_, i) => Math.trunc(Math.random(i) * 6) + 1
+// );
+
+// console.log(dice);
+
+// CODING CHANLLENGE
+const dogs = [
+  { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
+  { weight: 8, curFood: 200, owners: ["Matilda"] },
+  { weight: 13, curFood: 275, owners: ["Sarah", "John"] },
+  { weight: 32, curFood: 340, owners: ["Micheal"] },
+];
+
+// let food = {};
+const recommendedFood = dogs.forEach(function (dog) {
+  dog.recFood = Math.trunc(dog.weight ** 0.75 * 28);
+});
+console.log(dogs[0].weight);
+console.log(dogs[1].weight);
+console.log(dogs[2].weight);
+console.log(dogs[3].weight);
+console.log(dogs);
+
+const sarah = dogs.find((dog) => dog.owners.includes("Sarah"));
+console.log(sarah);
+
+if (sarah.curFood > sarah.recFood) {
+  console.log(`Sarah's dog eats too much food`);
+} else if (sarah.curFood < sarah.recFood) {
+  console.log(`Sarah's dog is not eating well enough`);
+} else {
+  console.log(`Sarah's dog is eating well`);
+}
+
+const ownersEatTooMuch = dogs
+  .filter((dog) => dog.curFood > dog.recFood)
+  .flatMap((dog) => dog.owners);
+console.log(ownersEatTooMuch);
+// console.log(
+//   `${ownersEatTooMuch[0]} and ${ownersEatTooMuch[1]} and ${ownersEatTooMuch[2]}'s dogs eat too much!`
+// );
+console.log(`${ownersEatTooMuch.join(" and ")}'s dogs eat too much!`);
+
+const ownersEatTooLittle = dogs
+  .filter((dog) => dog.curFood < dog.recFood)
+  .flatMap((dog) => dog.owners);
+console.log(ownersEatTooLittle);
+// console.log(
+//   `${ownersEatTooLittle[0]} and ${ownersEatTooLittle[1]} and ${ownersEatTooLittle[2]}'s dogs eat too little!`
+// );
+console.log(`${ownersEatTooLittle.join(" and ")}'s dogs eat too little!`);
+
+const eatingRec = dogs.some((dog) => dog.curFood === dog.recFood);
+console.log(eatingRec);
+
+const eatingOkay = dogs.some(
+  (dog) => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
+);
+
+console.log(eatingOkay);
+
+const arrDogEatingOkay = dogs.filter(
+  (dog) => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
+);
+console.log(arrDogEatingOkay);
+
+const dogCopy = dogs.slice().sort((a, b) => a.recFood - b.recFood);
+console.log(dogCopy);
+// const weight = dogs.forEach(
+//   (dog) => (dog.recFood = Math.trunc(dog.weight ** 0.75 * 28))
+// );
+
+// console.log(dogs[0].weight);
+// console.log(dogs[0].weight);
+// console.log(dogs[0].weight);
