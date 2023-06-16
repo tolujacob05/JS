@@ -217,59 +217,92 @@ const imgObserver = new IntersectionObserver(loadImg, {
 imgTarget.forEach((img) => imgObserver.observe(img));
 
 // THE SLIDER COMPONENT
-const slides = document.querySelectorAll(".slide");
-const slider = document.querySelector(".slider");
-const btnLeft = document.querySelector(".slider__btn--left");
-const btnRight = document.querySelector(".slider__btn--right");
-const dotContainer = document.querySelector(".dots");
+const slider = function () {
+  const slides = document.querySelectorAll(".slide");
+  const slider = document.querySelector(".slider");
+  const btnLeft = document.querySelector(".slider__btn--left");
+  const btnRight = document.querySelector(".slider__btn--right");
+  const dotContainer = document.querySelector(".dots");
 
-let currentSlide = 0;
-const maxSlide = slides.length;
+  // FUNCTIONS
+  let currentSlide = 0;
+  const maxSlide = slides.length;
 
-// slider.style.transform = "scale(0.5) translateX(-800px)";
-// slider.style.overflow = "visible";
+  const goToSlide = function (slide) {
+    slides.forEach((s, i) => {
+      s.style.transform = `translate(${100 * (i - slide)}%)`;
+    });
+  };
 
-// slides.forEach((slide, i) => {
-//   slide.style.transform = `translate(${100 * i}%)`;
-// });
+  // next slide
+  const nextSlide = function () {
+    if (currentSlide === maxSlide - 1) {
+      currentSlide = 0;
+    } else {
+      currentSlide++;
+    }
 
-const goToSlide = function (slide) {
-  slides.forEach((s, i) => {
-    s.style.transform = `translate(${100 * (i - slide)}%)`;
+    goToSlide(currentSlide);
+    activateDot(currentSlide);
+
+    // currentSlide = 1: -100%, 0%, 100%, 200%
+  };
+
+  const prevSlide = function () {
+    if (currentSlide === 0) {
+      currentSlide = maxSlide - 1;
+    } else {
+      currentSlide--;
+    }
+
+    goToSlide(currentSlide);
+    activateDot(currentSlide);
+  };
+
+  btnRight.addEventListener("click", nextSlide);
+  btnLeft.addEventListener("click", prevSlide);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") prevSlide();
+    e.key === "ArrowRight" && nextSlide();
+  });
+
+  const createDots = function () {
+    slides.forEach(function (_, i) {
+      dotContainer.insertAdjacentHTML(
+        "beforeend",
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
+
+  const activateDot = function (slide) {
+    document
+      .querySelectorAll(".dots__dot")
+      .forEach((dot) => dot.classList.remove("dots__dot--active"));
+
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add("dots__dot--active");
+  };
+
+  const init = function () {
+    goToSlide(0);
+    createDots();
+
+    activateDot(0);
+  };
+  init();
+
+  dotContainer.addEventListener("click", function (e) {
+    if (e.target.classList.contains("dots__dot")) {
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
   });
 };
-goToSlide(0);
-
-// next slide
-const nextSlide = function () {
-  if (currentSlide === maxSlide - 1) {
-    currentSlide = 0;
-  } else {
-    currentSlide++;
-  }
-
-  goToSlide(currentSlide);
-
-  // currentSlide = 1: -100%, 0%, 100%, 200%
-};
-
-const prevSlide = function () {
-  if (currentSlide === 0) {
-    currentSlide = maxSlide - 1;
-  } else {
-    currentSlide--;
-  }
-
-  goToSlide(currentSlide);
-};
-
-btnRight.addEventListener("click", nextSlide);
-btnLeft.addEventListener("click", prevSlide);
-
-document.addEventListener("keydown", function (e) {
-  if (e.key === "ArrowLeft") prevSlide;
-  e.key === "ArrowRight" && nextSlide();
-});
+slider();
 
 // const h1 = document.querySelector("h1");
 
@@ -414,4 +447,18 @@ Multiple classes can be addded
 
 // document.querySelector(".nav__links").addEventListener("click", function (e) {
 //   this.style.background = randomColor();
+// });
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  console.log("HTML parsed and DOM tree built", e);
+});
+
+document.addEventListener("load", function (e) {
+  console.log("Page fully loaded", e);
+});
+
+// window.addEventListener("beforeunload", function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = "";
 // });
