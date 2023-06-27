@@ -1,0 +1,12 @@
+11
+72C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\package.json133323500586651804 0
+77C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\package-lock.json133323374951310909 0
+64C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\dist133323391349780553 1
+75C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\shoppingCart.js133323396505313239 0
+70C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\index.html133323501121697975 0
+69C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\script.js133323498283832413 0
+82C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\dist\index.988e3e36.js133323386589574190 0
+86C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\dist\index.988e3e36.js.map133323386589654264 0
+75C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\dist\index.html133323391349740571 0
+84C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\dist\Modules.0ba4c94a.js133323391349424170 0
+88C:\Users\Tolu_Jacob\Desktop\clone-project\JS\Public\Modules\dist\Modules.0ba4c94a.js.map133323391349569857 0
